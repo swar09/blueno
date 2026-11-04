@@ -1,0 +1,75 @@
+[server]
+enabled = true
+host = "0.0.0.0"
+port = 8080
+
+[auth]
+enabled = true
+mode = "secret"
+jwks_endpoint = "https://auth.internal/.well_known/jwks.json"
+
+[jwt_cache]
+enabled = true
+ttl_secs = 15
+max_entries_per_shard = 5000
+sweep_interval_ms = 200
+
+[redis]
+url = "redis://127.0.0.1:6379"
+
+[limits]
+enabled = true
+max_request_body_bytes = 10485760
+# max_request_body_bytes = "unlimited"
+request_timeout_secs = 30
+min_cooldown_secs = 60
+max_cooldown_secs = 240
+
+[[routes]]
+path = "/api/v1/public"
+upstream = "http://127.0.0.1:8081"
+auth = false
+rate_limit = false
+
+[[routes]]
+path = "/api/v1/secure"
+upstream = "http://127.0.0.1:8082"
+auth = true
+rate_limit = true
+
+[rate_limiter]
+enabled = false
+redis_url = "redis://127.0.0.1:16379"
+key_prefix = "rl"
+lease_duration_secs = 5
+batch_window_micros = 2000
+# script_path = "conf/rate_limit.lua"
+default_tier = "tier4"
+
+[rate_limiter.tiers.tier1]
+initial_tokens = 1000
+fill_rate = 1000
+burst_interval_secs = 60
+max_tokens = 5000
+lease_batch_size = 500
+
+[rate_limiter.tiers.tier2]
+initial_tokens = 200
+fill_rate = 200
+burst_interval_secs = 60
+max_tokens = 1000
+lease_batch_size = 100
+
+[rate_limiter.tiers.tier3]
+initial_tokens = 50
+fill_rate = 50
+burst_interval_secs = 60
+max_tokens = 250
+lease_batch_size = 50
+
+[rate_limiter.tiers.tier4]
+initial_tokens = 10
+fill_rate = 10
+burst_interval_secs = 60
+max_tokens = 50
+lease_batch_size = 10
