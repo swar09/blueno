@@ -1,0 +1,101 @@
+[workspace]
+members = ["."]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[workspace.dependencies]
+blueno = { path = "." }
+
+arc-swap = "1.9.4"
+aws-lc-rs = "1.19"
+axum = "0.8.9"
+dashmap = "6.1"
+dotenvy = "0.15.7"
+fastrand = "2.5"
+http-body = "1"
+http-body-util = "0.1"
+hyper-util = "0.1.21"
+ipnet = "2.12.2"
+jsonwebtoken = { version = "11.1.0", default-features = false, features = [
+    "aws_lc_rs",
+    "use_pem",
+] }
+moka = "0.12"
+parking_lot = "0.12"
+redis = "1.7.0"
+regex = "1.13.1"
+reqwest = { version = "0.13.5", features = ["json"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+thiserror = "2.0.21"
+tokio = "1.54.0"
+toml = "0.8"
+tower = "0.5.3"
+tower-http = "0.6.2"
+tracing = "0.1"
+uuid = "1.28.0"
+
+[package]
+name = "blueno"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+arc-swap.workspace = true
+aws-lc-rs.workspace = true
+axum.workspace = true
+dashmap.workspace = true
+dotenvy.workspace = true
+fastrand.workspace = true
+http-body-util.workspace = true
+ipnet.workspace = true
+hyper-util = { workspace = true, features = [
+    "client-legacy",
+    "http1",
+    "http2",
+    "tokio",
+] }
+jsonwebtoken.workspace = true
+moka = { workspace = true, features = ["sync"] }
+parking_lot.workspace = true
+redis = { workspace = true, features = [
+    "aio",
+    "connection-manager",
+    "tokio-comp",
+] }
+regex.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "tracing"] }
+toml.workspace = true
+tower = { workspace = true, features = [
+    "balance",
+    "buffer",
+    "discover",
+    "limit",
+    "load",
+    "make",
+    "ready-cache",
+    "retry",
+    "timeout",
+    "util",
+] }
+tower-http = { workspace = true, features = [
+    "cors",
+    "limit",
+    "request-id",
+    "timeout",
+    "trace",
+    "util",
+] }
+tracing.workspace = true
+uuid = { workspace = true, features = ["serde", "v4", "v7"] }
+
+[dev-dependencies]
+http-body.workspace = true
+tokio = { workspace = true, features = ["macros", "net", "rt-multi-thread", "time"] }
