@@ -43,6 +43,10 @@ name = "blueno"
 version.workspace = true
 edition.workspace = true
 
+[[bin]]
+name = "blueno"
+path = "src/main.rs"
+
 [dependencies]
 arc-swap.workspace = true
 aws-lc-rs.workspace = true
