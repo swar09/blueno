@@ -1,0 +1,20 @@
+[package]
+name = "benchmark"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "benchmark"
+path = "src/main.rs"
+
+[dependencies]
+axum.workspace = true
+blueno.workspace = true
+fastrand.workspace = true
+jsonwebtoken.workspace = true
+parking_lot.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tokio = { workspace = true, features = ["macros", "net", "rt-multi-thread", "time"] }
+uuid = { workspace = true, features = ["v4"] }

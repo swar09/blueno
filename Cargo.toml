@@ -1,5 +1,8 @@
 [workspace]
-members = ["."]
+members = [
+    ".",
+    "benchmark",
+]
 resolver = "3"
 
 [workspace.package]
